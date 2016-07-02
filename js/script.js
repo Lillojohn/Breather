@@ -60,11 +60,11 @@ function breathCycle() {
     var p = performance.now();                      // Amount of seconds have pass since begin.
 
     var checkState = function(){                    // Check when behavior has to change.
-        if(i >= 0 && i < 3000){
+        if(i >= 0 && i < 4000){
             breathing.setStrategy(breathIn);
-        } else if(i >= 3000 && i < 8000){
+        } else if(i >= 4000 && i < 10000){
             breathing.setStrategy(breathOut);
-        } else if(i >= 8000 && i < 10000) {
+        } else if(i >= 10000 && i < 12000) {
             breathing.setStrategy(breathStop);
         } else {
             i = 0;
@@ -72,14 +72,14 @@ function breathCycle() {
         }
     };
 
-    if(i >= 10000){                                 // Check if a cycle is done
+    if(i >= 12000){                                 // Check if a cycle is done
         m++;
     }
 
     var cycle = function(){                         // Loop that calls the checkState, breath, breathCycle and change i.
         checkState();
         breath();
-        i =  p  - (m * 10000);
+        i =  p  - (m * 12000);
         breathCycle();
     };
 
@@ -89,15 +89,15 @@ function breathCycle() {
 // BreathIn behavior, expands the breathcircle.
 var BreathIn = function () {
     this.breath = function () {
-        breather.adjustSize(i * (breather.width / 3000), i * (breather.height / 3000));
+        breather.adjustSize(i * (breather.width / 4000), i * (breather.height / 4000));
     }
 };
 
 // BreathOut behavior, shrinks the breathcircle.
 var BreathOut = function () {
     this.breath = function () {
-        var m = i - 3000;
-        breather.adjustSize(breather.width - (breather.width / 5000 * m), breather.height - (breather.height / 5000 * m));
+        var m = i - 4000;
+        breather.adjustSize(breather.width - (breather.width / 6000 * m), breather.height - (breather.height / 6000 * m));
     }
 };
 
